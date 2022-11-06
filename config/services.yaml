@@ -1,0 +1,44 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: true
+
+#    _instanceof:
+#        App\Api\Shared\Domain\Bus\Command\CommandHandler:
+#            public: true
+#            tags: ['messenger.message_handler']
+
+    _instanceof:
+        # services whose classes are instances of CustomInterface will be tagged automatically
+        App\Api\Shared\Domain\Interface\CommandHandler:
+            tags: ['messenger.message_handler']
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\Api\Action\:
+        resource: '../src/Api/Action/**/Handler'
+
+#    App\:
+#        resource: '../src/'
+#        exclude:
+#            - '../src/{DependencyInjection/, Entity/, Domain/**, Kernel.php}'
+#            - '../src/Api/{Shared/Dto/, Shared/Trait/}'
+#            - '../src/Api/Action/**/TestCommand/'
+
+
+    App\Api\Entrypoint\Http\:
+        resource: '../src/Api/Entrypoint/Http'
+        tags: ['controller.service_arguments']
+
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
