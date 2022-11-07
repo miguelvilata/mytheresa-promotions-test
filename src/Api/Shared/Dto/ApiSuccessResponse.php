@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Api\Shared\Dto;
@@ -12,12 +13,7 @@ class ApiSuccessResponse
     public function __construct($data = [], ?int $status = 200, $extraHeaders = [])
     {
         $mainStatus = substr((string)$status, 0, 1);
-        $stringStatus = in_array($mainStatus, [4,5]) ? 'error' : 'success';
-
-        $response = new JsonResponse([
-            'status' => $stringStatus,
-            'data' => $data,
-        ], $status);
+        $response = new JsonResponse($data, $status);
 
         $response->headers->add($extraHeaders);
         $this->response = $response;
