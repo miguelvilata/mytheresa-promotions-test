@@ -9,3 +9,7 @@ kernel:
 api_controllers:
     resource: ../src/Api/Entrypoint/Http/
     type: annotation
+
+public_site:
+    path: /
+    controller: App\Controller\PublicController::__invoke

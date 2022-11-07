@@ -12,11 +12,6 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: true
 
-#    _instanceof:
-#        App\Api\Shared\Domain\Bus\Command\CommandHandler:
-#            public: true
-#            tags: ['messenger.message_handler']
-
     _instanceof:
         # services whose classes are instances of CustomInterface will be tagged automatically
         App\Api\Shared\Domain\Interface\CommandHandler:
