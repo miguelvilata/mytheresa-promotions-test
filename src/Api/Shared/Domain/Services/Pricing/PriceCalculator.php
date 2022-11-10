@@ -13,7 +13,7 @@ final class PriceCalculator
 
     public function calculate(Product $product): PriceCalculatorResult
     {
-        $finalPrice = null;
+        $finalPrice = $product->getPrice();
         $lines = [];
 
         foreach ($this->calculators as $calculator) {
@@ -21,12 +21,16 @@ final class PriceCalculator
                 continue;
             }
 
+            $operation = $calculator->calculate($product);
+
             $line = [
                 'name' => $calculator->getName(),
-                'amount' => $calculator->calculate($product),
+                'calculator' => $operation,
             ];
 
             $lines[$calculator->getCategory()] = $line;
+
+            $finalPrice = $finalPrice + $operation->amount;
         }
 
         return new PriceCalculatorResult(

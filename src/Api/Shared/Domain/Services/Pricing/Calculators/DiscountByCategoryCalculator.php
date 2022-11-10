@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Api\Shared\Domain\Services\Pricing\Calculators;
 
 use App\Api\Shared\Domain\Interface\PriceCalculator;
+use App\Api\Shared\Dto\CalculatorResult;
 use App\Domain\Entity\Product;
 
 class DiscountByCategoryCalculator implements PriceCalculator
@@ -15,19 +16,27 @@ class DiscountByCategoryCalculator implements PriceCalculator
     {
         $currentDiscountApplied = $processedLines[$this->getCategory()] ?? null;
         if (!is_null($currentDiscountApplied)) {
-            $asf = '';
+            $appliedDiscount = $currentDiscountApplied['calculator']->keyValue;
+
+            if ($appliedDiscount > self::DEFAULT_DISCOUNT) {
+                return false;
+            }
         }
 
         return in_array($product->getCategory(), self::CATEGORIES);
     }
 
-    public function calculate(Product $product): int
+    public function calculate(Product $product): CalculatorResult
     {
         $productPrice = $product->getPrice();
         $discount = $productPrice * (self::DEFAULT_DISCOUNT / 100);
         $t = $discount * -1;
 
-        return (int)$t;
+        return new CalculatorResult(
+            (int)$t,
+            $this->getCategory(),
+            self::DEFAULT_DISCOUNT
+        );
     }
 
     public function order(): int

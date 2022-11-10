@@ -6,7 +6,7 @@ namespace App\Api\Shared\Dto;
 final class PriceCalculatorResult
 {
 
-    public function __construct(int $original, int $final, )
+    public function __construct(int $original, int $final)
     {
     }
 }
