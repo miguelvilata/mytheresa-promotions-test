@@ -6,6 +6,7 @@ Todo:
 - swager doc
 - clases finales
 - es necesario el encolamiento de messenter?
+- uso interfaces, no debería inyectar ProductRepository sino una interfac genérica
 
 ## Table of Contents
 1. [General Info](#general-info)

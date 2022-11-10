@@ -12,12 +12,14 @@ final class ListProductView
         $this->productList = $productList;
     }
 
-    public function render()
+    public function render(): array
     {
         $result = [];
 
         foreach ($this->productList as $product) {
             $result[] = (new ProductView($product))->render();
         }
+
+        return $result;
     }
 }

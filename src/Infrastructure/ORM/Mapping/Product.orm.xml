@@ -8,9 +8,9 @@
             <generator strategy="NONE"/>
         </id>
 
-        <field name="name" length="50" unique="true" />
-        <field name="category" length="50" unique="true" />
-        <field name="price" type="integer" unique="true" />
+        <field name="name" length="50" />
+        <field name="category" length="50" />
+        <field name="price" type="integer" />
 
     </entity>
 </doctrine-mapping>

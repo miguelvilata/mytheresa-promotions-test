@@ -22,6 +22,12 @@ services:
     App\Api\Action\:
         resource: '../src/Api/Action/**/Handler'
 
+    App\Infrastructure\Repository\:
+        resource: '../src/Infrastructure/Repository'
+
+    App\Api\Shared\Domain\Services\:
+        resource: '../src/Api/Shared/Domain/Services'
+
 #    App\:
 #        resource: '../src/'
 #        exclude:

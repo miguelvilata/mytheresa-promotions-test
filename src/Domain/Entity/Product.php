@@ -3,12 +3,41 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use ApiBundle\ValueObject\Money;
+use App\Domain\ValueObject\Name;
+use App\Domain\ValueObject\Sku;
+
 final class Product
 {
     private string $sku;
     private string $name;
     private string $category;
     private int $price;
+
+    /**
+     * @param string $sku
+     * @param string $name
+     * @param string $category
+     * @param int $price
+     */
+    public function __construct(Sku $sku, Name $name, Name $category, Money $price)
+    {
+        $this->sku = $sku;
+        $this->name = $name->value();
+        $this->category = $category->value();
+        $this->price = $price->value();
+    }
+
+    static public function fromArray(array $data)
+    {
+        return new self(
+            new Sku($data->sku),
+            new Name($data->name),
+            new Name($data->category),
+            new Money($data->price),
+        );
+
+    }
 
     /**
      * @return mixed
