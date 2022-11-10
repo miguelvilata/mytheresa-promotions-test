@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Api\Action\Test\Command;
+namespace App\Api\Action\Product\Command;
 
-class TestCommand
+class ListProductCommand
 {
     public $text;
 
