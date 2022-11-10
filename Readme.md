@@ -1,3 +1,12 @@
+Todo:
+- eliminar no necesario de docker
+- probar aplicación desde otro sistema para comprobar que arranca y cumple especificaciones
+- revisar uso del .env/.env.local
+- revisar makefile
+- swager doc
+- clases finales
+- es necesario el encolamiento de messenter?
+
 ## Table of Contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)

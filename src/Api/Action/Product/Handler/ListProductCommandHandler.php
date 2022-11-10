@@ -22,6 +22,10 @@ class ListProductCommandHandler implements CommandHandler
     {
         $products = $this->em->getRepository(Product::class)->findAll();
 
+        foreach ($products as $product) {
+            return $product->getSku();
+        }
+
         return $command->text;
     }
 }
