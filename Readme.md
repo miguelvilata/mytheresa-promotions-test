@@ -7,6 +7,12 @@ Todo:
 - clases finales
 - es necesario el encolamiento de messenter?
 - uso interfaces, no debería inyectar ProductRepository sino una interfac genérica
+- ojo check resultados api (sin el data)
+- soltar excepcion en priceResutl?
+
+
+Podría haber hecho un tratamiento de las excepciones
+
 
 ## Table of Contents
 1. [General Info](#general-info)

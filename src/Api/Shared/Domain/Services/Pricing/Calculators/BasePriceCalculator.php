@@ -23,14 +23,9 @@ final class BasePriceCalculator implements PriceCalculator
         );
     }
 
-    public function order(): int
-    {
-        return 1;
-    }
-
     public function getCategory(): string
     {
-        return 'base';
+        return PriceCalculator::CALCULATOR_BASE_TYPE;
     }
 
     public function getName(): string

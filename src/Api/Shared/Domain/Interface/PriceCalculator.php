@@ -8,9 +8,11 @@ use App\Domain\Entity\Product;
 
 interface PriceCalculator
 {
+    const CALCULATOR_DISCOUNT_TYPE = 'discount_percentage';
+    const CALCULATOR_BASE_TYPE = 'base';
+
     public function supports(Product $product): bool;
     public function calculate(Product $product): CalculatorResult;
-    public function order(): int;
     public function getCategory(): string;
     public function getName(): string;
 }

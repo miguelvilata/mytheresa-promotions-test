@@ -18,10 +18,10 @@ final class ProductView
             'name' => $this->product->getName(),
             'category' => $this->product->getCategory(),
             'price' => [
-                'original' => $this->calculatorResult->original,
-                'final' => $this->calculatorResult->final,
-                'discount_percentage' => $this->calculatorResult->final,
-                'currency' => 'EUR',
+                'original' => $this->calculatorResult->getOriginalPrice(),
+                'final' => $this->calculatorResult->getFinalPrice(),
+                'discount_percentage' => $this->calculatorResult->getDiscountPercentage(),
+                'currency' => $this->calculatorResult->getCurrency(),
             ],
         ];
     }

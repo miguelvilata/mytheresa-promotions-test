@@ -25,10 +25,6 @@ final class PriceCalculator
             $priceCalculatorResult->addLine($calculator->calculate($product));
         }
 
-        $sku = $product->getSku();
-
-        $t = $priceCalculatorResult->getLines();
-
         return $priceCalculatorResult;
     }
 }

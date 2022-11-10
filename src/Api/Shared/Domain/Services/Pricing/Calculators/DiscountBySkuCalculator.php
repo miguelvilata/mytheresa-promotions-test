@@ -7,7 +7,7 @@ use App\Api\Shared\Domain\Interface\PriceCalculator;
 use App\Api\Shared\Dto\CalculatorResult;
 use App\Domain\Entity\Product;
 
-class DiscountBySkuCalculator implements PriceCalculator
+final class DiscountBySkuCalculator implements PriceCalculator
 {
     const SKUS = ['000003'];
     const DEFAULT_DISCOUNT = 15;
@@ -21,28 +21,22 @@ class DiscountBySkuCalculator implements PriceCalculator
     {
         $productPrice = $product->getPrice();
         $discount = $productPrice * (self::DEFAULT_DISCOUNT / 100);
-        $t = $discount * -1;
 
         return new CalculatorResult(
             $this->getName(),
-            (int)$t,
+            (int)$discount,
             $this->getCategory(),
             self::DEFAULT_DISCOUNT
         );
     }
 
-    public function order(): int
-    {
-        return 10;
-    }
-
     public function getCategory(): string
     {
-        return 'discount_percentage';
+        return PriceCalculator::CALCULATOR_DISCOUNT_TYPE;
     }
 
     public function getName(): string
     {
-        return 'DiscountByCategoryCalculator';
+        return 'DiscountBySkuCalculator';
     }
 }
