@@ -3,16 +3,13 @@ declare(strict_types=1);
 
 namespace App\Api\Action\Product\ViewModel;
 
+use App\Api\Shared\Dto\PriceCalculatorResult;
 use App\Domain\Entity\Product;
 
 final class ProductView
 {
-    private Product $product;
-
-    public function __construct(Product $product)
-    {
-        $this->product = $product;
-    }
+    public function __construct(private Product $product, private PriceCalculatorResult $calculatorResult)
+    {}
 
     public function render()
     {
@@ -20,7 +17,12 @@ final class ProductView
             'sku' => $this->product->getSku(),
             'name' => $this->product->getName(),
             'category' => $this->product->getCategory(),
-            'price' => $this->product->getPrice(),
+            'price' => [
+                'original' => $this->calculatorResult->original,
+                'final' => $this->calculatorResult->final,
+                'discount_percentage' => $this->calculatorResult->final,
+                'currency' => 'EUR',
+            ],
         ];
     }
 }

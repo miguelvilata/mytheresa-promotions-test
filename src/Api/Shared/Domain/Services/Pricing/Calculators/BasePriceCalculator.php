@@ -9,7 +9,7 @@ use App\Api\Shared\Domain\Interface\PriceCalculator;
 
 final class BasePriceCalculator implements PriceCalculator
 {
-    public function supports(Product $product, array $processedLines): bool
+    public function supports(Product $product): bool
     {
         return true;
     }
@@ -17,6 +17,7 @@ final class BasePriceCalculator implements PriceCalculator
     public function calculate(Product $product): CalculatorResult
     {
         return new CalculatorResult(
+            $this->getName(),
             $product->getPrice(),
             $this->getCategory()
         );

@@ -12,17 +12,8 @@ class DiscountBySkuCalculator implements PriceCalculator
     const SKUS = ['000003'];
     const DEFAULT_DISCOUNT = 15;
 
-    public function supports(Product $product, array $processedLines): bool
+    public function supports(Product $product): bool
     {
-        $currentDiscountApplied = $processedLines[$this->getCategory()] ?? null;
-        if (!is_null($currentDiscountApplied)) {
-            $appliedDiscount = $currentDiscountApplied['calculator']->keyValue;
-
-            if ($appliedDiscount > self::DEFAULT_DISCOUNT) {
-                return false;
-            }
-        }
-
         return in_array($product->getSku(), self::SKUS);
     }
 
@@ -33,6 +24,7 @@ class DiscountBySkuCalculator implements PriceCalculator
         $t = $discount * -1;
 
         return new CalculatorResult(
+            $this->getName(),
             (int)$t,
             $this->getCategory(),
             self::DEFAULT_DISCOUNT

@@ -8,7 +8,7 @@ use App\Domain\Entity\Product;
 
 interface PriceCalculator
 {
-    public function supports(Product $product, array $processedLines): bool;
+    public function supports(Product $product): bool;
     public function calculate(Product $product): CalculatorResult;
     public function order(): int;
     public function getCategory(): string;

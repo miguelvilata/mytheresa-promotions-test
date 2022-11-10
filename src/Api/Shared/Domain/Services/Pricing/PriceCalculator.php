@@ -8,35 +8,27 @@ use App\Domain\Entity\Product;
 
 final class PriceCalculator
 {
+    const CURRENCY = 'EUR';
+
     public function __construct(private iterable $calculators)
     {}
 
     public function calculate(Product $product): PriceCalculatorResult
     {
-        $finalPrice = $product->getPrice();
-        $lines = [];
+        $priceCalculatorResult = new PriceCalculatorResult($product);
 
         foreach ($this->calculators as $calculator) {
-            if (!$calculator->supports($product, $lines)) {
+            if (!$calculator->supports($product)) {
                 continue;
             }
 
-            $operation = $calculator->calculate($product);
-
-            $line = [
-                'name' => $calculator->getName(),
-                'calculator' => $operation,
-            ];
-
-            $lines[$calculator->getCategory()] = $line;
-
-            $finalPrice = $finalPrice + $operation->amount;
+            $priceCalculatorResult->addLine($calculator->calculate($product));
         }
 
-        return new PriceCalculatorResult(
-            $product->getPrice(),
-            0,
-            20
-        );
+        $sku = $product->getSku();
+
+        $t = $priceCalculatorResult->getLines();
+
+        return $priceCalculatorResult;
     }
 }
