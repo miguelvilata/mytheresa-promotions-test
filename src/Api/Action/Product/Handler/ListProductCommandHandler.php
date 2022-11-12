@@ -17,7 +17,7 @@ class ListProductCommandHandler implements CommandHandler
     public function __invoke(ListProductCommand $command)
     {
         $result = [];
-        $products = $this->productRepository->findAll();
+        $products = $this->productRepository->filter();
 
         foreach ($products as $product) {
             $priceResult = $this->priceCalculator->calculate($product);

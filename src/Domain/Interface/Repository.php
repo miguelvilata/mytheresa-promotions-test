@@ -13,4 +13,6 @@
 namespace App\Domain\Interface;
 
 interface Repository
-{}
+{
+    public function filter(array $filter = []): array;
+}

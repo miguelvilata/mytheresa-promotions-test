@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ApiBundle\ValueObject;
+namespace App\Domain\ValueObject;
 
 class Money
 {

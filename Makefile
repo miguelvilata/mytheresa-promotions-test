@@ -1,7 +1,7 @@
 make.DEFAULT_GOAL := help
 
 DOCKER_COMPOSE := docker-compose --file docker/docker-compose.yml
-PHP_UNIT := ./vendor/symfony/phpunit-bridge/bin/simple-phpunit -c app
+PHP_UNIT := ./bin/phpunit
 
 .PHONY: init
 init:
@@ -117,10 +117,9 @@ composer-dump-autoload:
 #test: see: https://docs.google.com/document/d/1oxCaf2mPqk2P7pGLtHfAzIxSPo8t_qyI00GmqNUId4Q/edit?usp=sharing
 .PHONY: test
 test:
-# 	make start
-# 	make composer-dump-autoload
-# 	$(DOCKER_COMPOSE) run docker-php-fpm rm -rf app/logs/* app/cache/*
-	make test-phpunit
+	make start
+	make cache-clear CACHE-ENV=test
+	$(DOCKER_COMPOSE) run --rm -u $(UID):$(GID) docker-php-fpm $(PHP_UNIT) $(TEST_DIR) --coverage-xml build/coverage
 
 #npm
 .PHONY: shell-npm

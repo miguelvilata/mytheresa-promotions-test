@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use ApiBundle\ValueObject\Money;
+use App\Domain\ValueObject\Money;
 use App\Domain\ValueObject\Name;
 use App\Domain\ValueObject\Sku;
 
@@ -22,7 +22,7 @@ final class Product
      */
     public function __construct(Sku $sku, Name $name, Name $category, Money $price)
     {
-        $this->sku = $sku;
+        $this->sku = $sku->value();
         $this->name = $name->value();
         $this->category = $category->value();
         $this->price = $price->value();

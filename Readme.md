@@ -9,6 +9,8 @@ Todo:
 - uso interfaces, no debería inyectar ProductRepository sino una interfac genérica
 - ojo check resultados api (sin el data)
 - soltar excepcion en priceResutl?
+- limpiar make
+- la interface generica de Repo, debería tener al menos 3 funciones, save, find y ?
 
 
 Podría haber hecho un tratamiento de las excepciones
