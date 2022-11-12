@@ -22,12 +22,12 @@ class GetListController
         $this->bus = $bus;
     }
 
-    #[Route('/api/product', name: 'http_get_test', methods: ['GET'])]
+    #[Route('/api/products', name: 'http_get_test', methods: ['GET'])]
     public function __invoke(Request $request)
     {
         try {
             return $this->apiSuccess(
-                $this->query(new ListProductCommand('hola y adio33s y hola')),
+                $this->query(new ListProductCommand('filtro')),
                 Response::HTTP_CREATED
             );
         } catch (ValidationException $e) {
