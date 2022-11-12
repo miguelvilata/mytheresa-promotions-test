@@ -26,10 +26,14 @@ final class ListProductCommandHandlerTest extends KernelTestCase
         $this->container = static::getContainer();
     }
 
-    public function testPushAndPop(): void
+    public function testProductInBootCategoryHave30PercentDiscount(): void
     {
         $priceCalculator = $this->getPriceCalculator();
         $productRepositoryMock = $this->getProductRepositoryMock();
+        $productRepositoryMock->method('filter')
+            ->willReturn([
+                new Product(new Sku('1'), new Name('pepito'), new Name('boots'), new Money(1000)),
+            ]);
 
         $listProductCommandHandler = new ListProductCommandHandler($productRepositoryMock, $priceCalculator);
 
@@ -39,9 +43,12 @@ final class ListProductCommandHandlerTest extends KernelTestCase
 
         print_r($result);
 
-
-
-        $this->assertTrue(false);
+        $this->assertIsArray($result);
+        $this->assertTrue(1 === count($result));
+        $this->assertTrue('boots' === $result[0]['category']);
+        $this->assertTrue(1000 === $result[0]['price']['original']);
+        $this->assertTrue(700 === $result[0]['price']['final']);
+        $this->assertTrue('30%' === $result[0]['price']['discount_percentage']);
     }
 
     private function getPriceCalculator()
@@ -51,25 +58,10 @@ final class ListProductCommandHandlerTest extends KernelTestCase
 
     private function getProductRepositoryMock()
     {
-//        $productRepository = $this->createMock(Repository::class);
-//        $productRepository
-//            ->method('filter()')
-//            ->willReturn([
-//                new Product(new Sku('1'), new Name('pepito'), new Name('category'), New Money(444)),
-//            ])
-//        ;
-
-        $stub = $this
+        return $this
             ->getMockBuilder(ProductMysqlRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $stub->method('filter')
-            ->willReturn([
-                new Product(new Sku('1'), new Name('pepito'), new Name('category'), new Money(888)),
-            ]);
-
-        return $stub;
     }
 
 }
