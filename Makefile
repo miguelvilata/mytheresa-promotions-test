@@ -7,6 +7,7 @@ PHP_UNIT := ./bin/phpunit
 init:
 	make start
 	make composer-install
+	make db-create
 	make migrations-execute
 
 .PHONY: fix-permissions
@@ -24,10 +25,14 @@ stop:
 .PHONY: restart
 restart: stop start
 
-#Access shell on containers
+#Db
 .PHONY: migrations-execute
 migrations-execute:
-	$(DOCKER_COMPOSE) exec docker-php-fpm bin/console doctrine:migrations:migrate
+	$(DOCKER_COMPOSE) exec docker-php-fpm bin/console --no-interaction doctrine:migrations:migrate
+
+.PHONY: db-create
+db-create:
+	$(DOCKER_COMPOSE) exec docker-php-fpm bin/console doctrine:database:create
 
 #Access shell on containers
 .PHONY: shell-php
