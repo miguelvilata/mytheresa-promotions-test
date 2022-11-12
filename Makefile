@@ -74,4 +74,4 @@ composer-dump-autoload:
 test:
 	make start
 	make cache-clear
-	$(DOCKER_COMPOSE) run --rm -u $(UID):$(GID) docker-php-fpm $(PHP_UNIT)
+	$(DOCKER_COMPOSE) run --rm -u $(UID):$(GID) docker-php-fpm php $(PHP_UNIT)
