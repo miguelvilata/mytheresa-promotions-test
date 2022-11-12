@@ -56,7 +56,7 @@ services:
     image: mysql:8.0.28
     restart: always
     environment:
-      MYSQL_DATABASE: 'lapsify'
+      MYSQL_DATABASE: 'database'
       # So you don't have to use root, but you can if you like
       MYSQL_USER: 'user'
       # You can use whatever password you like

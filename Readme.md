@@ -15,6 +15,7 @@ Todo:
 - se pueden hacer test mejores sobre el caculador, teniendo en cuenta precios menores que zero
 - pasar el filtro para PSR
 - instrucciones readme
+- ojo revisar .env, no se deben meter en el repo las credenciales
 
 
 Mejoras
