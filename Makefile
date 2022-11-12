@@ -7,7 +7,6 @@ PHP_UNIT := ./bin/phpunit
 init:
 	make start
 	make composer-install
-	make db-create
 	make migrations-execute
 
 .PHONY: fix-permissions
