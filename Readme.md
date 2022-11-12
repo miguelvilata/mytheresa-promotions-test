@@ -11,11 +11,17 @@ Todo:
 - soltar excepcion en priceResutl?
 - limpiar make
 - la interface generica de Repo, debería tener al menos 3 funciones, save, find y ?
+- test priceCalculator
+- se pueden hacer test mejores sobre el caculador, teniendo en cuenta precios menores que zero
+- pasar el filtro para PSR
 
 
+Mejoras
 Podría haber hecho un tratamiento de las excepciones
-
-
+Separación en el handler del listado, de la capa de la vista
+Hacer el cálculo de precio simplificaría el tratamiento posterior en listados, no tiene sentido pero entiendo que no se busca eso en la prueba
+esto permitiría hacer un test más limpio del hander, ya que no sería necesario inyectar el priceCalculator
+generar una bd de tests, no he creído que el contexto de la prueba fuera necesario
 ## Table of Contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)

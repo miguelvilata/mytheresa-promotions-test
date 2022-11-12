@@ -17,7 +17,9 @@ class ListProductCommandHandler implements CommandHandler
     public function __invoke(ListProductCommand $command)
     {
         $result = [];
-        $products = $this->productRepository->filter();
+        $products = $this->productRepository->filter(
+            $command->getFilters()
+        );
 
         foreach ($products as $product) {
             $priceResult = $this->priceCalculator->calculate($product);
@@ -26,6 +28,5 @@ class ListProductCommandHandler implements CommandHandler
         }
 
         return $result;
-        //return (new ListProductView($products))->render();
     }
 }

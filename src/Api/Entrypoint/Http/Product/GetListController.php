@@ -27,9 +27,11 @@ class GetListController
     {
         try {
             return $this->apiSuccess(
-                $this->query(new ListProductCommand('filtro')),
-                Response::HTTP_CREATED
-            );
+                $this->query(new ListProductCommand(
+                    $request->query->all()
+                ),
+                Response::HTTP_OK
+            ));
         } catch (ValidationException $e) {
             return $this->apiError($e->getMessage(), $e->getErrorList(), Response::HTTP_CONFLICT);
         } catch (\Exception $e) {

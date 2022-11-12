@@ -5,10 +5,19 @@ namespace App\Api\Action\Product\Command;
 
 class ListProductCommand
 {
-    public $text;
+    const CATEGORY_FILTER = 'category';
+    const PRICE_PRICE_LT_FILTER = 'price_lt';
 
-    public function __construct(string $text)
+    public array $filters = [];
+
+    public function __construct($payload)
     {
-        $this->text = $text;
+        $this->filters[self::CATEGORY_FILTER] = $payload[self::CATEGORY_FILTER] ?? null;
+        $this->filters[self::PRICE_PRICE_LT_FILTER] = $payload[self::PRICE_PRICE_LT_FILTER] ?? null;
+    }
+
+    public function getFilters()
+    {
+        return array_filter($this->filters);
     }
 }
