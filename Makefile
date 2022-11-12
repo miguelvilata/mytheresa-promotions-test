@@ -1,7 +1,7 @@
 make.DEFAULT_GOAL := help
 
 DOCKER_COMPOSE := docker-compose --file docker/docker-compose.yml
-PHP_UNIT := ./bin/phpunit
+PHP_UNIT := bin/phpunit
 
 .PHONY: init
 init:
@@ -24,14 +24,14 @@ stop:
 .PHONY: restart
 restart: stop start
 
+.PHONY: recreate
+recreate:
+	$(DOCKER_COMPOSE) up -d --build
+
 #Db
 .PHONY: migrations-execute
 migrations-execute:
 	$(DOCKER_COMPOSE) exec docker-php-fpm bin/console --no-interaction doctrine:migrations:migrate
-
-.PHONY: db-create
-db-create:
-	$(DOCKER_COMPOSE) exec docker-php-fpm bin/console doctrine:database:create
 
 #Access shell on containers
 .PHONY: shell-php
@@ -73,5 +73,5 @@ composer-dump-autoload:
 .PHONY: test
 test:
 	make start
-	make cache-clear CACHE-ENV=test
-	$(DOCKER_COMPOSE) run --rm -u $(UID):$(GID) docker-php-fpm $(PHP_UNIT) $(TEST_DIR) --coverage-xml build/coverage
+	make cache-clear
+	$(DOCKER_COMPOSE) run --rm -u $(UID):$(GID) docker-php-fpm $(PHP_UNIT)

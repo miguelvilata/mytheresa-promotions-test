@@ -80,23 +80,3 @@ services:
       PMA_PORT: 3306
       PMA_USER: 'user'
       PMA_PASSWORD: 'password'
-##    depends_on:
-##      - docker-nginx
-#
-#  aws-localstack:
-#    image: localstack/localstack-full
-#    environment:
-#      - SERVICES=s3
-#      - DEBUG=1
-#      - DEFAULT_REGION=eu-west-1
-#      - AWS_ACCESS_KEY_ID=test
-#      - AWS_SECRET_ACCESS_KEY=test
-#      - HOSTNAME_EXTERNAL=aws-localstack
-#    ports:
-#      - "4563-4599:4563-4599"
-#    volumes:
-#      - './localstack/conf/init/:/docker-entrypoint-initaws.d'
-##    networks:
-##      - web-network-docker
-#    depends_on:
-#      - docker-nginx
