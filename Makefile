@@ -7,6 +7,7 @@ PHP_UNIT := bin/phpunit
 init:
 	make start
 	make composer-install
+	make restart
 	make migrations-execute
 
 .PHONY: start
@@ -28,6 +29,10 @@ recreate:
 .PHONY: shell-php
 shell-php:
 	$(DOCKER_COMPOSE) exec docker-php-fpm bash
+
+.PHONY: composer-install
+composer-install:
+	$(DOCKER_COMPOSE) run --rm docker-php-fpm composer install -vvv
 
 #Cache clear
 .PHONY: cache-clear
