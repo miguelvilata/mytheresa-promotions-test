@@ -1,7 +1,7 @@
 Todo:
-- eliminar no necesario de docker
+ok - eliminar no necesario de docker
 - probar aplicación desde otro sistema para comprobar que arranca y cumple especificaciones
-- revisar uso del .env/.env.local
+ok - revisar uso del .env/.env.local
 - revisar makefile
 - swager doc
 - clases finales
