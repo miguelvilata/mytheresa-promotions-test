@@ -32,31 +32,11 @@ services:
     volumes:
       - ../:/var/www
 
-  docker-php-consumer:
-    restart: always
-    environment:
-      - DEBUG_PHP
-      - HOST_IP
-      - DEBUG
-      - REMOTE_HOST
-    build:
-      context: ./php-fpm-consumer
-    tty: true
-    volumes:
-      - ../:/var/www
-
-  docker-npm:
-    tty: true
-    build:
-      context: ./npm
-    volumes:
-      - ../:/var/www
-
   docker-db:
     image: mysql:8.0.28
     restart: always
     environment:
-      MYSQL_DATABASE: 'lapsify'
+      MYSQL_DATABASE: 'database'
       # So you don't have to use root, but you can if you like
       MYSQL_USER: 'user'
       # You can use whatever password you like
@@ -80,23 +60,3 @@ services:
       PMA_PORT: 3306
       PMA_USER: 'user'
       PMA_PASSWORD: 'password'
-##    depends_on:
-##      - docker-nginx
-#
-#  aws-localstack:
-#    image: localstack/localstack-full
-#    environment:
-#      - SERVICES=s3
-#      - DEBUG=1
-#      - DEFAULT_REGION=eu-west-1
-#      - AWS_ACCESS_KEY_ID=test
-#      - AWS_SECRET_ACCESS_KEY=test
-#      - HOSTNAME_EXTERNAL=aws-localstack
-#    ports:
-#      - "4563-4599:4563-4599"
-#    volumes:
-#      - './localstack/conf/init/:/docker-entrypoint-initaws.d'
-##    networks:
-##      - web-network-docker
-#    depends_on:
-#      - docker-nginx

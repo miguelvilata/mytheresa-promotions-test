@@ -9,8 +9,9 @@ class ValidationException extends \Exception
     public function __construct(array $errorList, $message = "validation_exception")
     {
         foreach ($errorList as $key => $error) {
-            if ($message == "validation_exception" && !empty($error))
-            $message = $error[0];
+            if ($message == "validation_exception" && !empty($error)) {
+                $message = $error[0];
+            }
             break;
         }
 

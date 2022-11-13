@@ -12,20 +12,25 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: true
 
-#    _instanceof:
-#        App\Api\Shared\Domain\Bus\Command\CommandHandler:
-#            public: true
-#            tags: ['messenger.message_handler']
-
     _instanceof:
         # services whose classes are instances of CustomInterface will be tagged automatically
-        App\Api\Shared\Domain\Interface\CommandHandler:
+        App\Api\Shared\Domain\Interface\CommandHandlerInterface:
             tags: ['messenger.message_handler']
+
+        # services whose classes are instances of CustomInterface will be tagged automatically
+        App\Api\Shared\Domain\Interface\PriceCalculatorCommandInterface:
+            tags: ['app.price_calculator']
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\Api\Action\:
         resource: '../src/Api/Action/**/Handler'
+
+    App\Infrastructure\Repository\:
+        resource: '../src/Infrastructure/Repository'
+
+    App\Api\Shared\Domain\Services\:
+        resource: '../src/Api/Shared/Domain/Services'
 
 #    App\:
 #        resource: '../src/'
@@ -38,6 +43,12 @@ services:
     App\Api\Entrypoint\Http\:
         resource: '../src/Api/Entrypoint/Http'
         tags: ['controller.service_arguments']
+
+    App\Api\Shared\Domain\Services\Pricing\PriceCalculator:
+        arguments: [!tagged_iterator { tag: 'app.price_calculator' }]
+
+    App\Domain\Interface\ProductRepositoryInterface: '@App\Infrastructure\Repository\ProductMysqlRepository'
+    App\Api\Shared\Domain\Interface\PriceCalculatorInterface: '@App\Api\Shared\Domain\Services\Pricing\PriceCalculator'
 
 
     # add more service definitions when explicit configuration is needed
