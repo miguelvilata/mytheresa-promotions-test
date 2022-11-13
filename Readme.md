@@ -13,8 +13,8 @@ Working code to pass the technical test "mytheresa Promotions Test" proposed by 
 
 ## Technologies
 ***
-I used symfony to resolve the test, but I considered using golang because it has less bootstrap and a more easy installation:
-* [https://symfony.com/](https://symfony.com/): Symfony
+I was thinking of using Golang to solve the tests because its configuration and deployment is simpler. I finally decided on Symfony because I have much more experience and background with this framework.
+* [https://symfony.com/](https://symfony.com/)
 
 
 ## Prerequisites
@@ -23,25 +23,29 @@ The project will heard for request at port 80, please check no other software is
 
 The application is encapsulated using docker virtualization and uses Make to automate test launch and installation.
 
-Here you have some links to install these commands in Ubuntu. 
+It is very possible that you already have these commands in your system, if not, I leave you some links for their installation in Ubuntu:
 
-Instructions to install docker & docker-compose:
+docker & docker-compose:
 * [docker && docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04)
 
-Make: 
-* [Make](#): sudo apt-get -y install make
+Make:
+```
+sudo apt-get update
+sudo apt-get -y install make
+```
 
 ## Installation
 ***
-The installation will do:
+To install the application run the following command:
+
+```
+git clone git@github.com:miguelvilata/mytheresa-promotions-test.git && cd mytheresa-promotions-test && make init
+```
+
+The above command will perform:
 * clone the repo at local
 * start containers
 * initialize de project installing vendors, creating database and executing migrations.
-
-To install execute:
-```
-$ git clone git@github.com:miguelvilata/mytheresa-promotions-test.git && cd mytheresa-promotions-test && make init
-```
 
 After that the project should be running in your localhost.
 
@@ -49,33 +53,38 @@ Then you can try:
 
 Get all products
 ```
-$ curl --location --request GET 'localhost/api/products'
+curl --location --request GET 'localhost/api/products'
 ```
 
 Get products from boots category
 ```
-$ curl --location --request GET 'localhost/api/products?category=boots'
+curl --location --request GET 'localhost/api/products?category=boots'
 ```
 
 Get product from boots category with price < 71001
 ```
-$ curl --location --request GET 'localhost/api/products?category=boots&price_lt=71001'
+curl --location --request GET 'localhost/api/products?category=boots&price_lt=71001'
 ```
 
 ## Test
 ***
 
+To execute the tests execute the followind command from project root folder:
 ```
-$ make test
+make test
 ```
 
 ## Observations
 ***
 
+I decided to take no more than 2 days to finish the test, I needed to make some decisions in order to meet my deadline.  
+
+These are some of them:
+
 * I didn't create a separate bd for testing I think it does not add value in the context of the proof.
 * I didn't configure documentation for the api using a bundle like Nelmio Api Doc
-* And improvement to the software will saving product with its final price and recalculate when necessary. This could help to simplify
-list processes not needing inject PriceCalculator and allowing to a better separation for the view model.
+* An improvement to the test could be to save product with its final price and recalculate it only when necessary. This could help simplify
+  the product list processes, without the need to inject PriceCalculator and allowing a better separation for the view model. I could have made a branch with this POC.
 
 This:
 ```
@@ -88,7 +97,7 @@ This:
         return $result;
 ```
 
-Becomes this:
+Could become this:
 
 ```
         return $this->listProductViewBuilder->build($products);
