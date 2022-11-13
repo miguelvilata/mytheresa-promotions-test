@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Repository;
 
-use App\Domain\Interface\Repository;
+use App\Domain\Interface\ProductRepositoryInterface;
 use App\Domain\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
-class ProductMysqlRepository extends ServiceEntityRepository implements Repository
+class ProductMysqlRepository extends ServiceEntityRepository implements ProductRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

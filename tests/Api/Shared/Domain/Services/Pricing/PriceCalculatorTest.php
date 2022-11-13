@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\tests\Api\Shared\Domain\Services\Pricing;
 
 use App\Api\Action\Product\Command\ListProductCommand;
-use App\Api\Action\Product\Handler\ListProductCommandHandler;
+use App\Api\Action\Product\Handler\ListProductCommandHandlerInterface;
 use App\Api\Shared\Domain\Services\Pricing\PriceCalculator;
 use App\Api\Shared\Dto\CalculatorResult;
 use App\Api\Shared\Dto\PriceCalculatorResult;

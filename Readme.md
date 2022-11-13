@@ -1,36 +1,3 @@
-Todo:
-ok - eliminar no necesario de docker
-- probar aplicación desde otro sistema para comprobar que arranca y cumple especificaciones
-ok - revisar uso del .env/.env.local
-- revisar makefile
-- swager doc
-- clases finales
-- es necesario el encolamiento de messenter?
-- uso interfaces, no debería inyectar ProductRepository sino una interfac genérica
-ok - ojo check resultados api (sin el data)
-- soltar excepcion en priceResutl?
-- limpiar make
-- la interface generica de Repo, debería tener al menos 3 funciones, save, find y ?
-ok - test priceCalculator
-ok - se pueden hacer test mejores sobre el caculador, teniendo en cuenta precios menores que zero
-- pasar el filtro para PSR
-- instrucciones readme
-- ojo revisar .env, no se deben meter en el repo las credenciales
-- imagen del resultado alojada en github
-
-
-Requisitos
-- instalar make
-- docker & docker-compose (link instalación)
-
-Mejoras
-Podría haber hecho un tratamiento de las excepciones
-Separación en el handler del listado, de la capa de la vista
-ok Hacer el cálculo de precio simplificaría el tratamiento posterior en listados, no tiene sentido pero entiendo que no se busca eso en la prueba
-ok esto permitiría hacer un test más limpio del hander, ya que no sería necesario inyectar el priceCalculator
-generar una bd de tests, no he creído que el contexto de la prueba fuera necesario
-
-
 ## Table of Contents
 1. [General Info](#general-info)
 2. [Technologies](#technologies)
@@ -106,7 +73,8 @@ $ make test
 ***
 
 * I didn't create a separate bd for testing I think it does not add value in the context of the proof.
-* And improvement to the software will saving producto with its final price and recalculate when necessary. This could help to simplify
+* I didn't configure documentation for the api using a bundle like Nelmio Api Doc
+* And improvement to the software will saving product with its final price and recalculate when necessary. This could help to simplify
 list processes not needing inject PriceCalculator and allowing to a better separation for the view model.
 
 This:

@@ -30,8 +30,8 @@ class GetListController
             return $this->apiSuccess(
                 $this->query(
                     new ListProductCommand(
-                    $request->query->all()
-                ),
+                        $request->query->all()
+                    ),
                     Response::HTTP_OK
                 )
             );

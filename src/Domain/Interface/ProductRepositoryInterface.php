@@ -12,7 +12,6 @@
 
 namespace App\Domain\Interface;
 
-interface Repository
+interface ProductRepositoryInterface extends RepositoryInterface
 {
-    public function filter(array $filter = []): array;
 }

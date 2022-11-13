@@ -6,13 +6,13 @@ namespace App\Api\Action\Product\Handler;
 
 use App\Api\Action\Product\Command\ListProductCommand;
 use App\Api\Action\Product\ViewModel\ProductView;
-use App\Api\Shared\Domain\Services\Pricing\PriceCalculator;
-use App\Api\Shared\Domain\Interface\CommandHandler;
-use App\Infrastructure\Repository\ProductMysqlRepository;
+use App\Api\Shared\Domain\Interface\CommandHandlerInterface;
+use App\Api\Shared\Domain\Interface\PriceCalculatorInterface;
+use App\Domain\Interface\ProductRepositoryInterface;
 
-class ListProductCommandHandler implements CommandHandler
+class ListProductCommandHandler implements CommandHandlerInterface
 {
-    public function __construct(private ProductMysqlRepository $productRepository, private PriceCalculator $priceCalculator)
+    public function __construct(private ProductRepositoryInterface $productRepository, private PriceCalculatorInterface $priceCalculator)
     {
     }
 

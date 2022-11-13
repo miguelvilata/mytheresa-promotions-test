@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Api\Shared\Domain\Services\Pricing\Calculators;
 
+use App\Api\Shared\Domain\Interface\PriceCalculatorCommandInterface;
 use App\Api\Shared\Dto\CalculatorResult;
 use App\Domain\Entity\Product;
-use App\Api\Shared\Domain\Interface\PriceCalculator;
 
-final class BasePriceCalculator implements PriceCalculator
+final class BasePriceCalculator implements PriceCalculatorCommandInterface
 {
     public function supports(Product $product): bool
     {
@@ -26,7 +26,7 @@ final class BasePriceCalculator implements PriceCalculator
 
     public function getCategory(): string
     {
-        return PriceCalculator::CALCULATOR_BASE_TYPE;
+        return PriceCalculatorCommandInterface::CALCULATOR_BASE_TYPE;
     }
 
     public function getName(): string

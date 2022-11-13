@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Api\Shared\Dto;
 
-use App\Api\Shared\Domain\Interface\PriceCalculator;
+use App\Api\Shared\Domain\Interface\PriceCalculatorCommandInterface;
+use App\Api\Shared\Domain\Interface\PriceCalculatorInterface;
 use App\Domain\Entity\Product;
 use App\Api\Shared\Domain\Exception\InvalidPercentageDiscountException;
 use App\Domain\ValueObject\Discount;
@@ -48,12 +49,12 @@ class PriceCalculatorResult
 
     private function isDiscount(CalculatorResult $calculatorResult): bool
     {
-        return PriceCalculator::CALCULATOR_DISCOUNT_TYPE == $calculatorResult->key;
+        return PriceCalculatorCommandInterface::CALCULATOR_DISCOUNT_TYPE == $calculatorResult->key;
     }
 
     public function getAmountDiscount(): ?int
     {
-        return $this->totalizeKey(PriceCalculator::CALCULATOR_DISCOUNT_TYPE);
+        return $this->totalizeKey(PriceCalculatorCommandInterface::CALCULATOR_DISCOUNT_TYPE);
     }
 
     private function totalizeKey(string $key): ?int
@@ -101,7 +102,7 @@ class PriceCalculatorResult
 
     private function getDiscount()
     {
-        $discountList = $this->lines[PriceCalculator::CALCULATOR_DISCOUNT_TYPE] ?? [];
+        $discountList = $this->lines[PriceCalculatorCommandInterface::CALCULATOR_DISCOUNT_TYPE] ?? [];
 
         if (1 === count($discountList)) {
             return $discountList[0];

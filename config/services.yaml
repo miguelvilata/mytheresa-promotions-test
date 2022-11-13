@@ -14,11 +14,11 @@ services:
 
     _instanceof:
         # services whose classes are instances of CustomInterface will be tagged automatically
-        App\Api\Shared\Domain\Interface\CommandHandler:
+        App\Api\Shared\Domain\Interface\CommandHandlerInterface:
             tags: ['messenger.message_handler']
 
         # services whose classes are instances of CustomInterface will be tagged automatically
-        App\Api\Shared\Domain\Interface\PriceCalculator:
+        App\Api\Shared\Domain\Interface\PriceCalculatorCommandInterface:
             tags: ['app.price_calculator']
 
     # makes classes in src/ available to be used as services
@@ -46,6 +46,10 @@ services:
 
     App\Api\Shared\Domain\Services\Pricing\PriceCalculator:
         arguments: [!tagged_iterator { tag: 'app.price_calculator' }]
+
+    App\Domain\Interface\ProductRepositoryInterface: '@App\Infrastructure\Repository\ProductMysqlRepository'
+    App\Api\Shared\Domain\Interface\PriceCalculatorInterface: '@App\Api\Shared\Domain\Services\Pricing\PriceCalculator'
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
