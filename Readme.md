@@ -9,7 +9,7 @@
 ***
 Working code to pass the technical test "mytheresa Promotions Test" proposed by Capitole Consulting for the position of Backend Developer .
 ### Screenshot
-![Image text](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
+![Screenshot](my-theresa.png)
 
 ## Technologies
 ***
