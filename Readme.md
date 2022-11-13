@@ -23,25 +23,29 @@ The project will heard for request at port 80, please check no other software is
 
 The application is encapsulated using docker virtualization and uses Make to automate test launch and installation.
 
-Here you have some links to install these commands in Ubuntu. 
+Here you have some links to install these commands in Ubuntu.
 
 Instructions to install docker & docker-compose:
 * [docker && docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04)
 
-Make: 
-* [Make](#): sudo apt-get -y install make
+To install Make go to command line an type:
+```
+$ sudo apt-get update
+$ sudo apt-get -y install make
+```
 
 ## Installation
 ***
-The installation will do:
-* clone the repo at local
-* start containers
-* initialize de project installing vendors, creating database and executing migrations.
+To install the application run the following command:
 
-To install execute:
 ```
 $ git clone git@github.com:miguelvilata/mytheresa-promotions-test.git && cd mytheresa-promotions-test && make init
 ```
+
+The above command will perform:
+* clone the repo at local
+* start containers
+* initialize de project installing vendors, creating database and executing migrations.
 
 After that the project should be running in your localhost.
 
@@ -65,6 +69,7 @@ $ curl --location --request GET 'localhost/api/products?category=boots&price_lt=
 ## Test
 ***
 
+To execute the tests execute the followind command from project root folder:
 ```
 $ make test
 ```
@@ -72,10 +77,12 @@ $ make test
 ## Observations
 ***
 
+These are some improvements or decisions I made:
+
 * I didn't create a separate bd for testing I think it does not add value in the context of the proof.
 * I didn't configure documentation for the api using a bundle like Nelmio Api Doc
-* And improvement to the software will saving product with its final price and recalculate when necessary. This could help to simplify
-list processes not needing inject PriceCalculator and allowing to a better separation for the view model.
+* And improvement to the software will be saving product with its final price and recalculate only when necessary. This could help to simplify
+  list processes, not needing inject PriceCalculator and allowing to a better separation for the view model.
 
 This:
 ```
@@ -88,7 +95,7 @@ This:
         return $result;
 ```
 
-Becomes this:
+Could become this:
 
 ```
         return $this->listProductViewBuilder->build($products);
