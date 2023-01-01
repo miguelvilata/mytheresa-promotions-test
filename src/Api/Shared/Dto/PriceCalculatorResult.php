@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Api\Shared\Dto;
 
 use App\Api\Shared\Domain\Interface\PriceCalculatorCommandInterface;
-use App\Api\Shared\Domain\Interface\PriceCalculatorInterface;
 use App\Domain\Entity\Product;
 use App\Api\Shared\Domain\Exception\InvalidPercentageDiscountException;
 use App\Domain\ValueObject\Discount;
