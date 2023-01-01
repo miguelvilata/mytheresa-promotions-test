@@ -77,14 +77,17 @@ make test
 ## Observations
 ***
 
-I decided to take no more than 2 days to finish the test, I needed to make some decisions in order to meet my deadline.  
+I postpone some things in order to send the test faster. I made this decision because I think they don't add value in the context of the proof:
 
-These are some of them:
-
-* I didn't create a separate bd for testing I think it does not add value in the context of the proof.
+* I didn't create a separate bd for testing.
 * I didn't configure documentation for the api using a bundle like Nelmio Api Doc
-* An improvement to the test could be to save product with its final price and recalculate it only when necessary. This could help simplify
-  the product list processes, without the need to inject PriceCalculator and allowing a better separation for the view model. I could have made a branch with this POC.
+
+
+## Improvements
+***
+
+Because the nature of the test, It is a requirement calculate the rates when they are loading. An improvement to the test could be to save product with its final price and recalculate it only when necessary. This could help simplify
+  the product list processes, without the need to inject PriceCalculator and allowing a better separation for the view model. 
 
 This:
 ```
